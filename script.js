@@ -1,14 +1,14 @@
-// База данных с точными именами файлов из твоего репозитория GitHub
+// База данных с точными именами файлов .png.png из твоего репозитория
 const mockProductsData = [
-    { id: 1, title: "Minimal Classic Pants", price: 65.00, category: "men", image: "images/1.png.jfif" },
-    { id: 2, title: "Technical Windbreaker", price: 130.00, category: "men", image: "images/2.png.jfif" },
-    { id: 3, title: "Graphic Studio Tee", price: 40.00, category: "men", image: "images/3.png.webp" },
-    { id: 4, title: "Oversized Gothic Hoodie", price: 80.00, category: "men", image: "images/4.png.webp" },
-    { id: 5, title: "Baggy Ninja Pants", price: 95.00, category: "men", image: "images/5.png.webp" },
-    { id: 6, title: "Vintage Wash Hoodie", price: 75.00, category: "women", image: "images/6.png.webp" },
-    { id: 7, title: "Serenity Heavyweight Tee", price: 45.00, category: "women", image: "images/7.png.webp" },
-    { id: 8, title: "Minimal Zip Bomber", price: 110.00, category: "men", image: "images/8.png.webp" },
-    { id: 9, title: "Striped Knit Sweater", price: 70.00, category: "women", image: "images/9.png.webp" }
+    { id: 1, title: "Minimal Classic Pants", price: 65.00, category: "men", image: "images/1.png.png" },
+    { id: 2, title: "Technical Windbreaker", price: 130.00, category: "men", image: "images/2.png.png" },
+    { id: 3, title: "Graphic Studio Tee", price: 40.00, category: "men", image: "images/3.png.png" },
+    { id: 4, title: "Oversized Gothic Hoodie", price: 80.00, category: "men", image: "images/4.png.png" },
+    { id: 5, title: "Baggy Ninja Pants", price: 95.00, category: "men", image: "images/5.png.png" },
+    { id: 6, title: "Vintage Wash Hoodie", price: 75.00, category: "women", image: "images/6.png.png" },
+    { id: 7, title: "Serenity Heavyweight Tee", price: 45.00, category: "women", image: "images/7.png.png" },
+    { id: 8, title: "Minimal Zip Bomber", price: 110.00, category: "men", image: "images/8.png.png" },
+    { id: 9, title: "Striped Knit Sweater", price: 70.00, category: "women", image: "images/9.png.png" }
 ];
 
 let products = [];
@@ -41,7 +41,7 @@ function renderProducts(items) {
             <div class="col-sm-6 product-item-card" data-category="${product.category}" data-title="${product.title.toLowerCase()}">
                 <div class="card showcase-card rounded-0">
                     <div class="showcase-img-holder">
-                        <img src="${product.image}" alt="${product.title}" style="mix-blend-mode: multiply;">
+                        <img src="${product.image}" alt="${product.title}">
                     </div>
                     <div class="card-body p-0 pt-3">
                         <div class="d-flex justify-content-between align-items-start">
@@ -49,7 +49,8 @@ function renderProducts(items) {
                                 <h6 class="text-uppercase fw-bold m-0 small">${product.title}</h6>
                                 <p class="fw-bold text-muted small mt-1">$${product.price.toFixed(2)}</p>
                             </div>
-                            <button class="btn btn-sm btn-dark rounded-0 text-uppercase px-3" onclick="addToCart(${product.id}, '${product.title}', ${product.price})">+ Bag</button>
+                            <!-- Класс изменен на btn-cart-add для применения кастомных стилей из style.css -->
+                            <button class="btn btn-sm btn-cart-add rounded-0 text-uppercase px-3" onclick="addToCart(${product.id}, '${product.title}', ${product.price})">+ Bag</button>
                         </div>
                     </div>
                 </div>
@@ -134,7 +135,12 @@ window.filterCategory = function(category) {
     currentCategory = category;
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    
+    // Подсвечиваем активную кнопку
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
+    
     applyFilters();
 };
 
@@ -145,6 +151,7 @@ window.searchProducts = function() {
 function applyFilters() {
     const query = document.getElementById('search-input').value.toLowerCase();
     const cards = document.querySelectorAll('.product-item-card');
+    let visibleCount = 0;
     
     cards.forEach(card => {
         const cardCategory = card.getAttribute('data-category');
@@ -155,10 +162,24 @@ function applyFilters() {
 
         if (matchesCategory && matchesSearch) {
             card.style.display = 'block';
+            visibleCount++;
         } else {
             card.style.display = 'none';
         }
     });
+
+    // Если в категории ничего нет, пишем об этом пользователю
+    const container = document.getElementById('products-container');
+    const existingMsg = document.getElementById('no-items-msg');
+    if (existingMsg) existingMsg.remove();
+
+    if (visibleCount === 0 && container) {
+        const msg = document.createElement('div');
+        msg.id = 'no-items-msg';
+        msg.className = 'w-100 text-center text-muted py-5 fw-bold text-uppercase';
+        msg.innerText = 'No items found matching your criteria.';
+        container.appendChild(msg);
+    }
 }
 
 function setupOrderForm() {
