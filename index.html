@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XIV CLOTHING | Minimalist E-Commerce</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top Full Width Navigation & Black Branding Banner -->
+    <nav class="navbar fixed-top">
+        <div class="logo-black-banner">
+            <div class="nav-container-grid">
+                
+                <!-- Left Block: Navigation Links -->
+                <div class="nav-left-group">
+                    <a class="nav-link-main active" href="#">Home</a>
+                    <a class="nav-link-main text-muted" href="#">Collections</a>
+                    <a class="nav-link-main text-muted" href="#">New</a>
+                </div>
+                
+                <!-- Center Block: Triangle & Brand Name -->
+                <div class="nav-center-group">
+                    <div class="logo-triangle-white"></div>
+                    <span class="logo-text-xiv">XIV</span>
+                </div>
+                
+                <!-- Right Block: Active Styled Cart Button -->
+                <div class="nav-right-group">
+                    <button class="btn-cart-premium" onclick="toggleCartModal()">
+                        <span>Cart</span>
+                        <span id="cart-badge" class="cart-badge-premium">0</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Main Layout Block -->
+    <div class="container-fluid px-5 hero-layout-wrapper">
+        <div class="row align-items-stretch">
+            
+            <!-- Left Grid: Filter Categories & Search -->
+            <div class="col-lg-4 d-flex flex-column justify-content-between py-4">
+                <div class="category-menu mb-4">
+                    <div class="d-flex gap-4 mb-3">
+                        <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+                        <button class="filter-btn" onclick="filterCategory('men')">Men</button>
+                        <button class="filter-btn" onclick="filterCategory('women')">Women</button>
+                        <button class="filter-btn" onclick="filterCategory('kids')">Kids</button>
+                    </div>
+                    
+                    <div class="search-box-wrapper position-relative">
+                        <input type="text" id="search-input" class="form-control" placeholder="Search product..." oninput="searchProducts()">
+                    </div>
+                </div>
+
+                <div class="hero-title-box">
+                    <h1 class="text-uppercase main-bold-title m-0">New<br>Collection</h1>
+                    <p class="text-muted small mt-1 tracking-widest text-uppercase">Summer 2026</p>
+                </div>
+
+                <div class="d-flex align-items-center gap-3 mt-4">
+                    <a href="#" class="btn btn-light border-0 rounded-0 px-4 py-3 text-uppercase fw-bold go-shop-btn">
+                        Explore Shop
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Grid: Clothing Items Showcase -->
+            <div class="col-lg-8">
+                <!-- Сюда JavaScript автоматически добавит все 9 карточек -->
+                <div class="row g-4" id="products-container"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal overlay for cart -->
+    <div class="modal-overlay" id="cartModal" style="display: none;">
+        <div class="modal-custom">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold text-uppercase m-0">Your Shopping Bag</h5>
+                <button class="btn p-0 fw-bold" onclick="toggleCartModal()">✕</button>
+            </div>
+            <div id="cart-items" class="mb-4"></div>
+            <div class="border-top pt-3">
+                <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+                    <span>Total:</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+                <form id="order-form">
+                    <div class="mb-3"><input type="text" class="form-input" id="customer-name" placeholder="Full Name" required></div>
+                    <div class="mb-3"><input type="email" class="form-input" id="customer-email" placeholder="Email Address" required></div>
+                    <button type="submit" class="btn btn-dark w-100 rounded-0 py-3 text-uppercase fw-bold">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
