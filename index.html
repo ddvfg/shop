@@ -15,9 +15,9 @@
                 
                 <!-- Left Block: Navigation Links -->
                 <div class="nav-left-group">
-                    <a class="nav-link-main active" href="#">Home</a>
-                    <a class="nav-link-main text-muted" href="#">Collections</a>
-                    <a class="nav-link-main text-muted" href="#">New</a>
+                    <button class="nav-link-main active" onclick="changeSection('home', this)">Home</button>
+                    <button class="nav-link-main text-muted" onclick="changeSection('collections', this)">Collections</button>
+                    <button class="nav-link-main text-muted" onclick="changeSection('new', this)">New</button>
                 </div>
                 
                 <!-- Center Block: Triangle & Brand Name -->
@@ -45,7 +45,6 @@
             <!-- Left Grid: Filter Categories & Search -->
             <div class="col-lg-4 d-flex flex-column justify-content-between py-4">
                 <div class="category-menu mb-4">
-                    <!-- Полностью функциональные интерактивные кнопки разделов -->
                     <div class="d-flex gap-4 mb-3">
                         <button class="filter-btn active" onclick="filterCategory('all')">All</button>
                         <button class="filter-btn" onclick="filterCategory('men')">Men</button>
@@ -59,43 +58,57 @@
                 </div>
 
                 <div class="hero-title-box">
-                    <h1 class="text-uppercase main-bold-title m-0">New<br>Collection</h1>
-                    <p class="text-muted small mt-1 tracking-widest text-uppercase">Summer 2026</p>
-                </div>
-
-                <div class="d-flex align-items-center gap-3 mt-4">
-                    <a href="#" class="btn btn-light border-0 rounded-0 px-4 py-3 text-uppercase fw-bold go-shop-btn">
-                        Explore Shop
-                    </a>
+                    <h1 class="text-uppercase main-bold-title m-0" id="page-main-title">New<br>Collection</h1>
+                    <p class="text-muted small mt-1 tracking-widest text-uppercase" id="page-sub-title">Summer 2026</p>
                 </div>
             </div>
 
             <!-- Right Grid: Clothing Items Showcase -->
             <div class="col-lg-8">
-                <!-- Сюда JavaScript автоматически добавит все 9 карточек -->
                 <div class="row g-4" id="products-container"></div>
             </div>
 
         </div>
     </div>
 
-    <!-- Modal overlay for cart -->
-    <div class="modal-overlay" id="cartModal" style="display: none;">
+    <!-- IMPROVED MINIMALIST SHOPPING BAG MODAL -->
+    <div class="modal-overlay" id="cartModal" style="display: none;" onclick="closeCartOnOverlay(event)">
         <div class="modal-custom">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h5 class="fw-bold text-uppercase m-0">Your Shopping Bag</h5>
-                <button class="btn p-0 fw-bold" onclick="toggleCartModal()">✕</button>
+            <!-- Modal Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom-heavy">
+                <h5 class="fw-bold text-uppercase m-0 tracking-wider">Your Shopping Bag</h5>
+                <button class="btn p-0 fw-bold close-modal-btn" onclick="toggleCartModal()">✕</button>
             </div>
-            <div id="cart-items" class="mb-4"></div>
-            <div class="border-top pt-3">
-                <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
-                    <span>Total:</span>
-                    <span id="cart-total">$0.00</span>
+            
+            <!-- Dynamic Cart Items Container -->
+            <div id="cart-items" class="mb-4 custom-scrollbar"></div>
+            
+            <!-- Checkout Section -->
+            <div class="border-top-heavy pt-3">
+                <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
+                    <span class="text-uppercase tracking-wider">Total:</span>
+                    <span id="cart-total" class="cart-total-price">$0.00</span>
                 </div>
+                
+                <!-- Expanded Checkout Form -->
                 <form id="order-form">
-                    <div class="mb-3"><input type="text" class="form-input" id="customer-name" placeholder="Full Name" required></div>
-                    <div class="mb-3"><input type="email" class="form-input" id="customer-email" placeholder="Email Address" required></div>
-                    <button type="submit" class="btn btn-dark w-100 rounded-0 py-3 text-uppercase fw-bold">Place Order</button>
+                    <div class="mb-3">
+                        <label class="form-label-custom">Full Name</label>
+                        <input type="text" class="form-input" id="customer-name" placeholder="John Doe" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label-custom">Email Address</label>
+                        <input type="email" class="form-input" id="customer-email" placeholder="example@mail.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label-custom">Phone Number</label>
+                        <input type="tel" class="form-input" id="customer-phone" placeholder="+380 00 000 0000" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label-custom">Delivery Address</label>
+                        <input type="text" class="form-input" id="customer-address" placeholder="City, Street, House / Post Office" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100 rounded-0 py-3 text-uppercase fw-bold checkout-submit-btn">Place Order</button>
                 </form>
             </div>
         </div>
