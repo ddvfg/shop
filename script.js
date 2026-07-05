@@ -1,6 +1,6 @@
-// ==========================================
+
 // 1. DATABASE (21 ITEMS WITH LOCAL IMAGES)
-// ==========================================
+
 const mockProductsData = [
     // --- MEN'S COLLECTION ---
     { id: 1, title: "Classic Streetwear Pants", price: 65.00, category: "men", tags: ["home"], image: "images/1.png.png" },
@@ -14,7 +14,7 @@ const mockProductsData = [
     { id: 9, title: "Striped Grunge Knit Sweater", price: 70.00, category: "men", tags: ["home"], image: "images/9.png.png" },
     { id: 11, title: "Essential Oversized Black Tee", price: 35.00, category: "men", tags: ["home"], image: "images/11.png.png" },
     
-    // Сеты и костюмы для вкладки COLLECTIONS
+   
     { id: 12, title: "Sport Full Tracksuit Set", price: 120.00, category: "men", tags: ["collections", "new"], image: "images/12.png.png" },
     { id: 14, title: "Pikachu Tee & Shorts Set", price: 45.00, category: "kids", tags: ["collections"], image: "images/14.png.png" },
 
@@ -32,15 +32,15 @@ const mockProductsData = [
     { id: 19, title: "Kids Classic Denim Overalls", price: 50.00, category: "kids", tags: ["home"], image: "images/19.png.png" }
 ];
 
-// Глобальные переменные состояния
+
 let products = [];
 let cart = JSON.parse(localStorage.getItem('xiv_cart')) || [];
 let currentCategory = 'all';
 let currentSection = 'home';
 
-// ==========================================
+
 // 2. APP INITIALIZATION & NAVIGATION
-// ==========================================
+
 document.addEventListener('DOMContentLoaded', () => {
     initApp();
 });
@@ -98,9 +98,9 @@ window.changeSection = function(section, clickedButton) {
 
     renderProducts(getFilteredSectionItems());
 };
-// ==========================================
+
 // 3. PRODUCT RENDERING ENGINE
-// ==========================================
+
 function renderProducts(items) {
     const container = document.getElementById('products-container');
     if (!container) return;
@@ -150,9 +150,9 @@ function initScrollAnimation() {
     cards.forEach(card => observer.observe(card));
 }
 
-// ==========================================
+
 // 4. CART & LOCALSTORAGE SYSTEM
-// ==========================================
+
 window.addToCart = function(id, title, price, image) {
     const cartItem = cart.find(item => item.id === id);
     if (cartItem) {
@@ -244,9 +244,9 @@ window.closeCartOnOverlay = function(event) {
     }
 };
 
-// ==========================================
+
 // 5. SEARCH & FILTER ENGINES
-// ==========================================
+
 window.filterCategory = function(category) {
     currentCategory = category;
     const buttons = document.querySelectorAll('.filter-btn');
@@ -308,9 +308,9 @@ function applyFilters() {
     initScrollAnimation();
 }
 
-// ==========================================
+
 // 6. ORDER FORM VALIDATION & CHECKOUT
-// ==========================================
+
 function setupOrderForm() {
     const orderForm = document.getElementById('order-form');
     orderForm?.addEventListener('submit', (e) => {
